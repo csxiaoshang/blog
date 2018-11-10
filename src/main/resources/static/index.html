@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     </script>
-    <script>$.ajax({url:"/blog/index",success:function(result){
+    <script>$.ajax({url:'/blog/index',success:function(result){
             $("#div1").html(result);
         }});</script>
 <style>
@@ -30,12 +30,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Everyone‘s Blog</a>
+            <a class="glyphicon glyphicon-home" href="/index.html">Everyone‘s Blog</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav ">
                 <li class="active"><a href="/index.html"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
-                <li><a href="/blog.html"><span class="glyphicon glyphicon-shopping-cart"></span> 博客</a></li>
+                <li><a href="/articledisplay.html"><span class="glyphicon glyphicon-shopping-cart"></span> 博客</a></li>
                 <li><a href="/about.html"><span class="glyphicon glyphicon-headphones"></span> 关于</a></li>
                 <li><a href="/login.html"><span class="glyphicon glyphicon-headphones"></span> 登录</a></li>
                 <li><a href="/blog/register"><span class="glyphicon glyphicon-headphones"></span> 注册</a></li>

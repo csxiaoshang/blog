@@ -25,7 +25,7 @@ public class indexController {
     @Autowired
     UserServiceImpl userService;
     @GetMapping(path = "/index")
-    public List<String> index(Model model){
+    public List<String> index(){
         List<String> titleList=new ArrayList<String>();
         titleList.add("nihao");
         titleList.add("bushihenhao");
