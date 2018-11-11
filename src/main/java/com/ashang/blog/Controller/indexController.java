@@ -49,7 +49,7 @@ public class indexController {
     @GetMapping(path = "/login")
     public String login(User user){
         if(userService.login(user)){
-            return "/index.html";
+            return "forward:/user.html";
         }
         return "请重新输入密码";
     }

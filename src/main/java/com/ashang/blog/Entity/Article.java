@@ -11,8 +11,10 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private Long articleID;
+    private Long articleId;
 
+    @Column
+    private Long userId;
     @Column
     private String articleTitle;
 
