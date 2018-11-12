@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -47,8 +49,10 @@ public class indexController {
     }
 
     @GetMapping(path = "/login")
-    public String login(User user){
+    public String login(User user , HttpServletRequest request){
         if(userService.login(user)){
+            HttpSession httpSession=request.getSession(true);
+            httpSession.setAttribute("user",user);
             return "forward:/user.html";
         }
         return "请重新输入密码";

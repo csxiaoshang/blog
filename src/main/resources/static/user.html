@@ -61,14 +61,21 @@
 </div>
 <div class="container">
     <div class="jumbotron">
-        <h1>欢迎来到博客首页！</h1>
-        <p>请先登录</p>
-        <p><a class="btn btn-primary btn-lg" role="button">
-            了解更多</a>
-        </p>
+
     </div>
 </div>
 </body>
+<script>
+    $.ajax({
+        type:"post",
+        url:"/user/self",success: function(result) {
+            // language=JQuery-CSS
+            var json=eval(result);
+            var user=json.username;
+            $("#user").html(user);
+        }});
+
+</script>
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
