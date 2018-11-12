@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ArticleDao extends JpaRepository<Article,Long> {
-    List<Article> findByuserID(Long id);
+    List<Article> findByUserId(Long id);
 }

@@ -106,11 +106,11 @@
 
 <script>
     $.ajax({
-        type:"get",
+        type:"post",
         url:"/article/user",success: function(result) {
             // language=JQuery-CSS
             var json=eval(result);
-            alert(JSON.stringify(json));
+            alert(JSON.title);
             $.each(json,function (index,item) {
                 var title=json[index].articleTitle;
                 var description=json[index].articleDescription;

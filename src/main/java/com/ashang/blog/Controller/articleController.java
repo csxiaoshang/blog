@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +30,11 @@ public class articleController {
     ArticleServiceImpl articleService;
     @Autowired
     ArticleDao articleDao;
-    @GetMapping(path = "/add")
-    public String addArticle(HttpSession httpSession,Article article){
+    @RequestMapping(path = "/add",method = RequestMethod.POST)
+    public void addArticle(HttpSession httpSession, Article article, HttpServletResponse response) throws IOException {
             User user= (User) httpSession.getAttribute("user");
             articleService.addArticle(article,user);
-            return  "/articleuser.html";
-
+            response.sendRedirect("/articles.html");
     }
 
     @RequestMapping(path = "/common",method = RequestMethod.POST)
@@ -43,11 +44,11 @@ public class articleController {
         return  a;
     }
 
-    @RequestMapping(path = "/user",method =RequestMethod.GET)
+    @RequestMapping(path = "/user",method =RequestMethod.POST)
     @ResponseBody
-    public  List<Article> articleuser(HttpSession httpSession){
+    public  List<Article> articled(HttpSession httpSession){
         User user= (User) httpSession.getAttribute("user");
-        List<Article> a= articleDao.findByuserID(user.getId());
+        List<Article> a= articleDao.findByUserId(user.getId());
         return a;
     }
 

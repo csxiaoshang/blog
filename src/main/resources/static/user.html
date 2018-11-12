@@ -6,9 +6,6 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     </script>
-    <script>$.ajax({url:'/blog/index',success:function(result){
-            $("#div1").html(result);
-        }});</script>
     <style>
         body {
             padding-top: 50px;
@@ -61,17 +58,19 @@
 </div>
 <div class="container">
     <div class="jumbotron">
-
+    <div>欢迎进入你的个人博客</div>
     </div>
 </div>
 </body>
 <script>
     $.ajax({
         type:"post",
-        url:"/user/self",success: function(result) {
+        url:"http://47.94.132.150:8081/user/self",success: function(result) {
             // language=JQuery-CSS
             var json=eval(result);
+            alert(json);
             var user=json.username;
+            alert(user);
             $("#user").html(user);
         }});
 

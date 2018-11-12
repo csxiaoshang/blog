@@ -53,9 +53,9 @@ public class indexController {
         if(userService.login(user)){
             HttpSession httpSession=request.getSession(true);
             httpSession.setAttribute("user",user);
-            return "forward:/user.html";
+            return "/user.html";
         }
-        return "请重新输入密码";
+        return "/index.html";
     }
 
 

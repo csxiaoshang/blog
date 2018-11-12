@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean login(User user) {
                Optional<User> u=userDao.findByUsername(user.getUsername());
+//               u.ifPresent(user1-> user.setId(user1.getId()));
        if(u.isPresent()){
           if(user.getPassword().equals(u.get().getPassword()))
                 return true;
