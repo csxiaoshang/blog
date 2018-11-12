@@ -23,8 +23,10 @@ public class UserServiceImpl implements UserService {
                Optional<User> u=userDao.findByUsername(user.getUsername());
 //               u.ifPresent(user1-> user.setId(user1.getId()));
        if(u.isPresent()){
-          if(user.getPassword().equals(u.get().getPassword()))
-                return true;
+          if(user.getPassword().equals(u.get().getPassword())){
+              user.setId(u.get().getId());
+              return true;
+          }
           else
               return false;
        }
