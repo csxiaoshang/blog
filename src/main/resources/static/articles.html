@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
@@ -38,67 +37,28 @@
                 <li><a href="/login.html"><span class="glyphicon glyphicon-headphones"></span> 登录</a></li>
                 <li><a href="/blog/register"><span class="glyphicon glyphicon-headphones"></span> 注册</a></li>
             </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="user">
+                        个人中心
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li><a href="#">个人资料</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/articles.html">我的博客</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/article.html">发表博客</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
 </div>
 <div class="container">
     <div class="jumbotron">
         <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseOne">
-                            <div id="title">title</div>
-                            <div>
-                                <div id="description"></div>
-                                <div id="tag"></div>
-                            </div>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body" id="content">
-                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-                        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                        vice lomo.
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseTwo">
-                            点击我进行展开，再次点击我进行折叠。第 2 部分
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-                        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                        vice lomo.
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseThree">
-                            点击我进行展开，再次点击我进行折叠。第 3 部分
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-                        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                        vice lomo.
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -108,20 +68,31 @@
     $.ajax({
         type:"post",
         url:"/article/user",success: function(result) {
-            // language=JQuery-CSS
-            var json=eval(result);
-            alert(JSON.title);
-            $.each(json,function (index,item) {
-                var title=json[index].articleTitle;
-                var description=json[index].articleDescription;
-                var tag=json[index].articleTag;
-                var content=json[index].articleContent;
-                $("#title").html(title);
-                $("#description").html(description);
-                $("#tag").html(tag);
-                $("#content").html(content);
-            });
+            // language=JQuery-CSSspring_blog@localhost
+            var json=result;
+            var str="";
+            for(var index in json){
+                str+="          <div class=\"panel panel-default\">\n" +
+                    "                        <div class=\"panel-heading\">\n" +
+                    "                            <h4 class=\"panel-title\">\n" +
+                    "                                <a data-toggle=\"collapse\" data-parent=\"#accordion\"\n" +
+                    "                                   href=\"#collapseOne\">"+
+                    json[index].articleTitle+
+                    "  </a>\n" +
+                    "                            </h4>\n" +
+                    "                        </div>\n" +
+                    "                        <div id=\"collapseOne\" class=\"panel-collapse collapse in\">\n" +
+                    "                            <div class=\"panel-body\" id=\"content\">"+
+                    json[index].articleContent+
+                    "         </div>\n" +
+                    "                        </div>\n" +
+                    "                    </div>";
 
+            }
+            $("#accordion").html(str);
+        }
+        ,error:function () {
+            alert("error");
         }});
 
 </script>

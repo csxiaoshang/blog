@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
@@ -65,52 +64,49 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseTwo">
-                                    点击我进行展开，再次点击我进行折叠。第 2 部分
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-                                cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                                vice lomo.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseThree">
-                                    点击我进行展开，再次点击我进行折叠。第 3 部分
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-                                cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                                vice lomo.
-                            </div>
-                        </div>
-                    </div>
         </div>
     </div>
 </div>
 </body>
-
 <script>
+    $.ajax({
+        type:"post",
+        url:"/article/common",success: function(result) {
+            // language=JQuery-CSSspring_blog@localhost
+            var json=result;
+            var str="";
+            for(var index in json){
+                str+="          <div class=\"panel panel-default\">\n" +
+                    "                        <div class=\"panel-heading\">\n" +
+                    "                            <h4 class=\"panel-title\">\n" +
+                    "                                <a data-toggle=\"collapse\" data-parent=\"#accordion\"\n" +
+                    "                                   href=\"#collapseOne\">"+
+                        json[index].articleTitle+
+                        "  </a>\n" +
+                    "                            </h4>\n" +
+                    "                        </div>\n" +
+                    "                        <div id=\"collapseOne\" class=\"panel-collapse collapse in\">\n" +
+                    "                            <div class=\"panel-body\" id=\"content\">"+
+                        json[index].articleContent+
+                        "         </div>\n" +
+                    "                        </div>\n" +
+                    "                    </div>";
+
+            }
+            $("#accordion").html(str);
+        }
+        ,error:function () {
+            alert("error");
+        }});
+
+</script>
+<!--<script>
     $.ajax({
             type:"post",
             url:"/article/common",success: function(result) {
             // language=JQuery-CSS
-            var json=eval(result);
-            alert(JSON.stringify(json));
+            //var json=eval(result);
+            var json=result;
             $.each(json,function (index,item) {
                 var title=json[index].articleTitle;
                 var description=json[index].articleDescription;
@@ -124,6 +120,7 @@
 
         }});
 
-</script>
+</script>-->
+
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
