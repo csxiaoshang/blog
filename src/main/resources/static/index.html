@@ -66,6 +66,19 @@
     </div>
 </div>
 </body>
+<script>
+    $.ajax({
+        type:"get",
+        dataType:"json",
+        url:"http://localhost:8080/blog/index",success: function(result) {
+            // language=JQuery-CSS
+            alert(result);
+            $("#id").html(result);
+        },
+        error:function () {
+            alert("error!");
+        }});
+</script>
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>

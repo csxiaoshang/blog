@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/blog")
+@CrossOrigin(origins = "http://localhost:80")
 public class indexController {
 
     @Autowired
@@ -27,11 +28,9 @@ public class indexController {
     @Autowired
     UserServiceImpl userService;
     @GetMapping(path = "/index")
-    public List<String> index(){
-        List<String> titleList=new ArrayList<String>();
-        titleList.add("nihao");
-        titleList.add("bushihenhao");
-        return titleList;
+    @ResponseBody
+    public String index(){
+        return "nihao!";
     }
 
     @GetMapping(path ="/register")
