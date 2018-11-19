@@ -8,10 +8,7 @@ import com.ashang.blog.Entity.User;
 import com.ashang.blog.Service.impl.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +18,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/article")
+@CrossOrigin(origins = "http://localhost:8001",maxAge = 3600)
 public class articleController {
 
     @Autowired

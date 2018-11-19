@@ -31,11 +31,11 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav ">
-                <li class="active"><a href="/index.html"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
-                <li ><a href="/articledisplay.html"><span class="glyphicon glyphicon-shopping-cart"></span> 博客</a></li>
-                <li><a href="/about.html"><span class="glyphicon glyphicon-headphones"></span> 关于</a></li>
-                <li><a href="/login.html"><span class="glyphicon glyphicon-headphones"></span> 登录</a></li>
-                <li><a href="/blog/register"><span class="glyphicon glyphicon-headphones"></span> 注册</a></li>
+                <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                <li ><a href="articledisplay.html"><span class="glyphicon glyphicon-shopping-cart"></span> 博客</a></li>
+                <li><a href="about.html"><span class="glyphicon glyphicon-headphones"></span> 关于</a></li>
+                <li><a href="login.html"><span class="glyphicon glyphicon-headphones"></span> 登录</a></li>
+                <li><a href="register.html"><span class="glyphicon glyphicon-headphones"></span> 注册</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
                 <li class="dropdown">
@@ -55,7 +55,7 @@
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
-</div>2
+</div>
 <div class="container">
     <div class="jumbotron">
         <h1>欢迎来到博客首页！</h1>
@@ -69,7 +69,6 @@
 <script>
     $.ajax({
         type:"get",
-        dataType:"json",
         url:"http://localhost:8080/blog/index",success: function(result) {
             // language=JQuery-CSS
             alert(result);

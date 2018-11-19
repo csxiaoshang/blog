@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
 import java.security.PublicKey;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/blog")
-@CrossOrigin(origins = "http://localhost:80")
+@CrossOrigin(origins = "http://localhost:8001",maxAge = 3600)
 public class indexController {
 
     @Autowired
@@ -27,10 +28,11 @@ public class indexController {
 
     @Autowired
     UserServiceImpl userService;
+
     @GetMapping(path = "/index")
     @ResponseBody
     public String index(){
-        return "nihao!";
+        return "hao!";
     }
 
     @GetMapping(path ="/register")
