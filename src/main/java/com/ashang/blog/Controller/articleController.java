@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/article")
-@CrossOrigin(origins = "http://localhost:8001",maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:8001",maxAge = 3600)
 public class articleController {
 
     @Autowired
@@ -47,6 +47,7 @@ public class articleController {
     public  List<Article> articled(HttpSession httpSession){
         User user= (User) httpSession.getAttribute("user");
         List<Article> a= articleDao.findByUserId(user.getId());
+        System.out.println(a);
         return a;
     }
 

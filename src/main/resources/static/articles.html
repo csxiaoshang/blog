@@ -67,6 +67,10 @@
 <script>
     $.ajax({
         type:"post",
+        xhrFields: {                        //解决跨域session丢失问题
+            withCredentials: true
+        },
+        crossDomain: true,
         url:"http://localhost:8080/article/user",success: function(result) {
             // language=JQuery-CSSspring_blog@localhost
             var json=result;

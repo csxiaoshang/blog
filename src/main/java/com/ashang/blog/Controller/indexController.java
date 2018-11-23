@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping(path = "/blog")
-@CrossOrigin(origins = "http://localhost:8001",maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:8001",maxAge = 3600)
 public class indexController {
 
     @Autowired
@@ -54,7 +54,9 @@ public class indexController {
         if(userService.login(user)){
             HttpSession httpSession=request.getSession(true);
             httpSession.setAttribute("user",user);
-            return "/user.html";
+            System.out.println(user+"login");
+            String str="success";
+            return str;
         }
         return "/index.html";
     }

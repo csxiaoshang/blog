@@ -65,14 +65,19 @@
 <script>
     $.ajax({
         type:"post",
-        url:"http://localhost:8080/user/self",success: function(result) {
+        url:"http://localhost:8080/user/self",
+        xhrFields: {                        //解决跨域session丢失问题
+            withCredentials: true
+        },
+        crossDomain: true,
+        success: function(result) {
             // language=JQuery-CSS
-            var json=eval(result);
-            var user=json.username;
-            alert(user);
+            console.log(result);
+            console.log(result);
+            var user=result.username;
             $("#user").html(user);
         },
-    error:function () {
+    fail:function () {
         alert("error!");
     }});
 
