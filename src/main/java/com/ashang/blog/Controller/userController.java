@@ -47,8 +47,8 @@ public class userController{
             HttpSession session=request.getSession(false);
             if(session==null)
                 return "false";
-            String string=userManagerService.isAdmin(session);
-            if(string.equals("true"))
+            String str= (String) session.getAttribute("admin");
+            if(str.equals("true"))
                 return "success";
             return "false";
         }
