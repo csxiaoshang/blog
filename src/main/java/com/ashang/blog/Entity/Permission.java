@@ -15,11 +15,11 @@ public class Permission {
     private Long id;
 
     @Column
-    private Boolean high;
+    private String high;
 
     @Column
-    private Boolean medium;
+    private String medium;
 
     @Column
-    private  Boolean low;
+    private  String low;
 }

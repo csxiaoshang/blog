@@ -1,7 +1,9 @@
 package com.ashang.blog.Controller;
 
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Service.impl.UserManagerServiceImpl;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,11 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(path = "/user")
 //@CrossOrigin(origins = "http://localhost:8001",maxAge = 3600)
 public class userController{
+
+
+    @Autowired
+    UserManagerServiceImpl userManagerService;
+
 
     @RequestMapping(path = "/self",method = RequestMethod.POST)
     @ResponseBody
@@ -33,5 +40,16 @@ public class userController{
         }
         session.removeAttribute("user");
         return "success";
+        }
+
+        @GetMapping(path = "/manager")
+        public  String unarguable(HttpServletRequest request){
+            HttpSession session=request.getSession(false);
+            if(session==null)
+                return "false";
+            String string=userManagerService.isAdmin(session);
+            if(string.equals("true"))
+                return "success";
+            return "false";
         }
 }

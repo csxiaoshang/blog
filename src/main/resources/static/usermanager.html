@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+        body {
+            padding-top: 50px;
+            padding-left: 50px;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="https://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="glyphicon glyphicon-home" href="/index.html">Everyone‘s Blog</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav ">
+                <li ><a href="index.html"><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                <li class="active"><a href="articledisplay.html"><span class="glyphicon glyphicon-shopping-cart"></span> 博客</a></li>
+                <li><a href="about.html"><span class="glyphicon glyphicon-headphones"></span> 关于</a></li>
+                <li><a href="login.html"><span class="glyphicon glyphicon-headphones"></span> 登录</a></li>
+                <li><a href="register.html"><span class="glyphicon glyphicon-headphones"></span> 注册</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="user">
+                        个人中心
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li><a href="#">个人资料</a></li>
+                        <li class="divider"></li>
+                        <li><a href="articles.html">我的博客</a></li>
+                        <li class="divider"></li>
+                        <li><a href="article.html">发表博客</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</div>
+<div class="container">
+    <div class="jumbotron">
+        <div class="panel-group" id="accordion">
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    $.ajax({
+        type:"post",
+        xhrFields: {                        //解决跨域session丢失问题
+            withCredentials: true
+        },
+        crossDomain: true,
+        url:"http://localhost:8080/article/user",success: function(result) {
+            // language=JQuery-CSSspring_blog@localhost
+            var json=result;
+            var str="";
+            for(var index in json){
+                str+="          <div class=\"panel panel-default\">\n" +
+                    "                        <div class=\"panel-heading\">\n" +
+                    "                            <h4 class=\"panel-title\">\n" +
+                    "                                <a data-toggle=\"collapse\" data-parent=\"#accordion\"\n" +
+                    "                                   href=\"#collapseOne\">"+
+                    json[index].articleTitle+
+                    "  </a>\n" +
+                    "                            </h4>\n" +
+                    "                        </div>\n" +
+                    "                        <div id=\"collapseOne\" class=\"panel-collapse collapse in\">\n" +
+                    "                            <div class=\"panel-body\" id=\"content\">"+
+                    json[index].articleContent+
+                    "         </div>\n" +
+                    "                        </div>\n" +
+                    "                    </div>";
+
+            }
+            $("#accordion").html(str);
+        }
+        ,error:function () {
+            alert("error");
+        }});
+
+</script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

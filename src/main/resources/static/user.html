@@ -38,29 +38,31 @@
                 <li><a href="/blog/register"><span class="glyphicon glyphicon-headphones"></span> 注册</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="user">
-                        个人中心
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="divider"></li>
-                        <li><a href="#">个人资料</a></li>
-                        <li class="divider"></li>
-                        <li><a href="articles.html">我的博客</a></li>
-                        <li class="divider"></li>
-                        <li><a href="article.html">发表博客</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" onclick="logout()">注销</a></li>
-                    </ul>
-                </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="user">
+                    个人中心
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="divider"></li>
+                    <li><a href="#" onclick="manager()">管理用户</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">个人资料</a></li>
+                    <li class="divider"></li>
+                    <li><a href="articles.html">我的博客</a></li>
+                    <li class="divider"></li>
+                    <li><a href="article.html">发表博客</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" onclick="logout()">注销</a></li>
+                </ul>
+            </li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
 </div>
 <div class="container">
     <div class="jumbotron">
-        <div>欢迎进入你的个人博客</div>
+    <div>欢迎进入你的个人博客</div>
     </div>
 </div>
 </body>
@@ -79,9 +81,9 @@
             var user=result.username;
             $("#user").html(user);
         },
-        fail:function () {
-            alert("error!");
-        }})
+    fail:function () {
+        alert("error!");
+    }})
 
     function logout() {
         $.ajax({
@@ -97,6 +99,23 @@
                 }
                 else
                     alert("注销失败！");
+            }
+        })
+    }
+    function manager() {
+        $.ajax({
+            type:"get",
+            url:"http://localhost:8080/user/manager",
+            xhrFields: {                        //解决跨域session丢失问题
+                withCredentials: true
+            },
+            crossDomain: true,
+            success:function (result) {
+                if (result="success"){
+                    window.location.href="usermanager.html";
+                }
+                else
+                    alert("没有权限");
             }
         })
     }
