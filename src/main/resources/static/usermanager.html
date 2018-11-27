@@ -71,32 +71,32 @@
             withCredentials: true
         },
         crossDomain: true,
-        url:"http://localhost:8080/article/user",success: function(result) {
+        url:"http://localhost:8080/user/unman",success: function(result) {
             // language=JQuery-CSSspring_blog@localhost
+            console.log(result);
             var json=result;
-            var str="";
+            var str="<table class=\"table table-hover\">" +
+                "<caption>用户列表</caption>\n" +
+                "                <thead>\n" +
+                "                <tr>\n" +
+                "                    <th>ID</th>\n" +
+                "                    <th>用户名</th>\n" +
+                "                    <th>用户权限</th>\n" +
+                "                </tr>\n" +
+                "                </thead>\n" +
+                "                <tbody>\n" ;
             for(var index in json){
-                str+="          <div class=\"panel panel-default\">\n" +
-                    "                        <div class=\"panel-heading\">\n" +
-                    "                            <h4 class=\"panel-title\">\n" +
-                    "                                <a data-toggle=\"collapse\" data-parent=\"#accordion\"\n" +
-                    "                                   href=\"#collapseOne\">"+
-                    json[index].articleTitle+
-                    "  </a>\n" +
-                    "                            </h4>\n" +
-                    "                        </div>\n" +
-                    "                        <div id=\"collapseOne\" class=\"panel-collapse collapse in\">\n" +
-                    "                            <div class=\"panel-body\" id=\"content\">"+
-                    json[index].articleContent+
-                    "         </div>\n" +
-                    "                        </div>\n" +
-                    "                    </div>";
-
+                str+="<tr>"+
+                    "<td>"+json[index].id+ "</td>\n" +
+                    "<td>"+json[index].username+"</td>"+
+                    "<td>"+json[index].permission+"</td>"+"</tr>"
             }
+            str+="</tbody>\n" +
+                "            </table>";
             $("#accordion").html(str);
         }
         ,error:function () {
-            alert("error");
+            //console.log(results);
         }});
 
 </script>

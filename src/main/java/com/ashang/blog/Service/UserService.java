@@ -1,6 +1,9 @@
 package com.ashang.blog.Service;
 
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Entity.UserD;
+
+import java.util.List;
 
 /**
  * @author ashang 9700090853@qq.com
@@ -18,4 +21,10 @@ public interface UserService {
      *
      */
     void register(User user);
+
+    /**
+     * 用户展示函数
+     *
+     */
+    List<UserD> findAll();
 }

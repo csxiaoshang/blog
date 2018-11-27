@@ -1,7 +1,9 @@
 package com.ashang.blog.Controller;
 
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Entity.UserD;
 import com.ashang.blog.Service.impl.UserManagerServiceImpl;
+import com.ashang.blog.Service.impl.UserServiceImpl;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import sun.plugin.liveconnect.SecurityContextHelper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -21,6 +24,9 @@ public class userController{
 
     @Autowired
     UserManagerServiceImpl userManagerService;
+
+    @Autowired
+    UserServiceImpl userService;
 
 
     @RequestMapping(path = "/self",method = RequestMethod.POST)
@@ -59,5 +65,13 @@ public class userController{
                 }
             }
             return "false";
+        }
+
+        @PostMapping(path = "/unman")
+        @ResponseBody
+       public  List<UserD> display(){
+            List<UserD> userDS= userService.findAll();
+            System.out.println(userDS);
+            return userDS;
         }
 }

@@ -1,11 +1,16 @@
 package com.ashang.blog.Service.impl;
 
-import com.ashang.blog.Dao.UserDao;
+import com.ashang.blog.Dao.*;
+import com.ashang.blog.Entity.Role;
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Entity.UserD;
+import com.ashang.blog.Entity.UserRole;
 import com.ashang.blog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -17,6 +22,14 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    UserRoleDao userRoleDao;
+    @Autowired
+    PermissionDao permissionDao;
+    @Autowired
+    RolePermissionDao rolePermissionDao;
+    @Autowired
+    RoleDao roleDao;
 
     @Override
     public boolean login(User user) {
@@ -40,5 +53,26 @@ public class UserServiceImpl implements UserService {
         u.setUsername(user.getUsername());
         u.setPassword(user.getPassword());
         userDao.save(user);
+    }
+
+    @Override
+    public List<UserD> findAll(){
+        List<UserD> userDS=new ArrayList<>();
+        List<User> users= userDao.findAll();
+        for (User user:
+             users) {
+            UserD userD=new UserD();
+            userD.setId(user.getId());
+            userD.setUsername(user.getUsername());
+           Long reid=userRoleDao.findByUserId(user.getId()).getRoleId();
+            Optional<Role> role = roleDao.findById(reid);
+            String  str = null;
+            if (role.isPresent()){
+                str=role.get().getRole();
+            }
+            userD.setPermission(str);
+            userDS.add(userD);
+        }
+        return userDS;
     }
 }
