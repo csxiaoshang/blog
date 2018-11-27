@@ -27,7 +27,6 @@ public class userController{
     @ResponseBody
         public User self(HttpSession httpSession){
             User user= (User) httpSession.getAttribute("user");
-            System.out.println(user);
             return user;
         }
 
@@ -47,9 +46,18 @@ public class userController{
             HttpSession session=request.getSession(false);
             if(session==null)
                 return "false";
-            String str= (String) session.getAttribute("admin");
-            if(str.equals("true"))
-                return "success";
+            String string=userManagerService.isAdmin(session);
+                if (string.equals("true")){
+                    System.out.println("证实是root用户！");
+                    String str= (String) session.getAttribute("admin");
+                    if (str==null)
+                        return "false";
+                    if (str.equals("true")){
+                        return "success";
+                }else {
+                    return "false";
+                }
+            }
             return "false";
         }
 }

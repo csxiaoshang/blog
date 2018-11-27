@@ -54,7 +54,6 @@ public class indexController {
         if(userService.login(user)){
             HttpSession httpSession=request.getSession(true);
             httpSession.setAttribute("user",user);
-            System.out.println(user+"login");
             String str="success";
             return str;
         }

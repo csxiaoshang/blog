@@ -47,7 +47,6 @@ public class articleController {
     public  List<Article> articled(HttpSession httpSession){
         User user= (User) httpSession.getAttribute("user");
         List<Article> a= articleDao.findByUserId(user.getId());
-        System.out.println(a);
         return a;
     }
 

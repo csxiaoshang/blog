@@ -1,42 +1,38 @@
 package com.ashang.blog.Aspect;
 
+
+import com.ashang.blog.Entity.User;
 import com.ashang.blog.Service.impl.UserManagerServiceImpl;
-import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * @author ashang
- *
- * 18-11-26 21:10pm
- */
-
 @Aspect
-public aspect admin {
-    @Autowired UserManagerServiceImpl userManagerService;
-    @Pointcut("execution(* com.ashang.blog.Controller.userController.unarguable(..))")
-    private void users(){}
+@Component
+public class admin {
+
+    @Pointcut("execution(public * com.ashang.blog.Service.impl.UserManagerServiceImpl.*(..))")
+    public void users(){}
 
     @Before("users()")
-    private void admin() {
+    public void admin() {
+        System.out.println("切入点获取成功");
         ServletRequestAttributes attributes= (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request=attributes.getRequest();
         HttpSession session=request.getSession(false);
-        String string=userManagerService.isAdmin(session);
-        if(string.equals("true")){
-            String str="true";
-            session.setAttribute("admin",str);
-        }else {
-            String str="false";
-            session.setAttribute("admin",str);
+        User user= (User) session.getAttribute("user");
+        if(user.getUsername().equals("root")){
+            session.setAttribute("admin","true");
+        }else{
+            session.setAttribute("admin","false");
         }
+
     }
 }
-
