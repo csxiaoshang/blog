@@ -37,25 +37,16 @@ public class indexController {
 
     /**
      * 注册接口
-     * @return 注册页面
-     */
-    @GetMapping(path ="/register")
-    public String register(){
-        return "/register.html";
-    }
-
-    /**
-     * 注册接口
      * @param user
      * @return
      */
     @GetMapping(path = "/register/user")
-    public String registeruser(User user){
+    public String register(User user){
         if(user.getUsername()==null||user.getPassword()==null){
             return "用户名或者密码不能为空";
         }
         userService.register(user);
-        return "/login.html";
+        return "success";
     }
 
     /**
@@ -72,7 +63,8 @@ public class indexController {
             String str="success";
             return str;
         }
-        return "/index.html";
+        final String s = "false";
+        return s;
     }
 
 

@@ -37,10 +37,10 @@ public class articleController {
      * @throws IOException
      */
     @RequestMapping(path = "/add",method = RequestMethod.POST)
-    public void addArticle(HttpSession httpSession, Article article, HttpServletResponse response) throws IOException {
+    public String addArticle(HttpSession httpSession, Article article, HttpServletResponse response) throws IOException {
             User user= (User) httpSession.getAttribute("user");
             articleService.addArticle(article,user);
-            response.sendRedirect("/articles.html");
+            return "success";
     }
 
     /**
