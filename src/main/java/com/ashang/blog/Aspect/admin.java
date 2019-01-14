@@ -14,6 +14,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ *  AOP权限管理控制
+ */
 @Aspect
 @Component
 public class admin {

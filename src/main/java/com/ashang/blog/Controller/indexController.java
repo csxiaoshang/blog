@@ -35,11 +35,20 @@ public class indexController {
         return "hao!";
     }
 
+    /**
+     * 注册接口
+     * @return 注册页面
+     */
     @GetMapping(path ="/register")
     public String register(){
         return "/register.html";
     }
 
+    /**
+     * 注册接口
+     * @param user
+     * @return
+     */
     @GetMapping(path = "/register/user")
     public String registeruser(User user){
         if(user.getUsername()==null||user.getPassword()==null){
@@ -49,6 +58,12 @@ public class indexController {
         return "/login.html";
     }
 
+    /**
+     * 登录接口
+     * @param user 登录用户
+     * @param request  第一次登录传入Session用于后续使用
+     * @return
+     */
     @GetMapping(path = "/login")
     public String login(User user , HttpServletRequest request){
         if(userService.login(user)){

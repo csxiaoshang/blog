@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * 公共文章实体表
+ */
 @Data
 @Entity
 public class ArticleCommon {

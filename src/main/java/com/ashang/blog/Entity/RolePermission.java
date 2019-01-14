@@ -5,6 +5,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * RBAC模型 角色权限关联表
+ */
 @Data
 @Entity
 public class RolePermission {

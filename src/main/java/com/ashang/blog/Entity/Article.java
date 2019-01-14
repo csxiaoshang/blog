@@ -4,6 +4,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * 文章数据库实体表
+ */
+
 @Entity
 @Data
 public class Article {

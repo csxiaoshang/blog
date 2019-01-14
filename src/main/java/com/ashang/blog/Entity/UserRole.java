@@ -5,6 +5,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * 用户角色关联表
+ */
 @Data
 @Entity
 public class UserRole {

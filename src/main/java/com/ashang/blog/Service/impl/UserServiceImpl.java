@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * 用户业务逻辑类
  * @author ashang
  * 18-11-05 11:16am
  */
@@ -31,6 +32,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     RoleDao roleDao;
 
+    /**
+     * 用户登录方法
+     * @param user
+     * @return 布尔型参数 用来判断用户是否登录成功
+     */
     @Override
     public boolean login(User user) {
                Optional<User> u=userDao.findByUsername(user.getUsername());
@@ -47,6 +53,10 @@ public class UserServiceImpl implements UserService {
            return false;
     }
 
+    /**
+     * 用户注册方法
+     * @param user
+     */
     @Override
     public void register(User user) {
         User u=new User();
@@ -55,6 +65,10 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
     }
 
+    /**
+     * 查询所有用户
+     * @return UserD  用户ID  用户名 用户角色
+     */
     @Override
     public List<UserD> findAll(){
         List<UserD> userDS=new ArrayList<>();
@@ -70,7 +84,7 @@ public class UserServiceImpl implements UserService {
             if (role.isPresent()){
                 str=role.get().getRole();
             }
-            userD.setPermission(str);
+            userD.setRole(str);
             userDS.add(userD);
         }
         return userDS;

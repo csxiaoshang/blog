@@ -6,6 +6,9 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.persistence.criteria.Predicate;
 
+/**
+ * 权限实体表
+ */
 @Data
 @Entity
 public class Permission {

@@ -7,5 +7,5 @@ import lombok.Data;
 public class UserD {
     private Long id;
     private String username;
-    private String permission;
+    private String role;
 }

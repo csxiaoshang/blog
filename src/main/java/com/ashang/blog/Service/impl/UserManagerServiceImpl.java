@@ -14,6 +14,7 @@ import java.util.Optional;
 
 
 /**
+ * 管理员管理用户逻辑类
  * @author ashang
  *
  * 18-11-26 20:39pm
@@ -29,6 +30,12 @@ public class UserManagerServiceImpl implements UserManagerSerivce {
     PermissionDao permissionDao;
     @Autowired
     RolePermissionDao rolePermissionDao;
+
+    /**
+     * 判断是否拥有管理员权限
+     * @param session
+     * @return 权限标志
+     */
     @Override
     public  String isAdmin(HttpSession session){
        User user= (User) session.getAttribute("user");

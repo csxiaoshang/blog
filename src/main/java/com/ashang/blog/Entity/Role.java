@@ -7,6 +7,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+/**
+ * 角色实体表
+ */
 @Data
 @Entity
 public class Role {

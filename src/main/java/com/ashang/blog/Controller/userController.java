@@ -28,7 +28,11 @@ public class userController{
     @Autowired
     UserServiceImpl userService;
 
-
+    /**
+     * 用于在博客右上角个人中心位置显示用户名
+     * @param httpSession  Session用于判别用户
+     * @return  user类
+     */
     @RequestMapping(path = "/self",method = RequestMethod.POST)
     @ResponseBody
         public User self(HttpSession httpSession){
@@ -36,6 +40,12 @@ public class userController{
             return user;
         }
 
+    /**
+     * 登出操作 抹去Session保存的用户个人信息
+     * @param request
+     * @param response
+     * @return
+     */
         @GetMapping(path = "/logout")
         public String logout(HttpServletRequest request, HttpServletResponse response){
 
@@ -47,6 +57,11 @@ public class userController{
         return "success";
         }
 
+    /**
+     * 判断是否拥有管理权限，在前端中判断是否能够管理用户
+     * @param request
+     * @return
+     */
         @GetMapping(path = "/manager")
         public  String unarguable(HttpServletRequest request){
             HttpSession session=request.getSession(false);
@@ -67,6 +82,10 @@ public class userController{
             return "false";
         }
 
+    /**
+     * 查询当前用户
+     * @return  UserD  包含用户ID 用户名 用户角色
+     */
         @PostMapping(path = "/unman")
         @ResponseBody
        public  List<UserD> display(){

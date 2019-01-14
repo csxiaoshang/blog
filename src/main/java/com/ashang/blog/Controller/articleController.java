@@ -28,6 +28,14 @@ public class articleController {
     ArticleServiceImpl articleService;
     @Autowired
     ArticleDao articleDao;
+
+    /**
+     *填写发表个人博客
+     * @param httpSession
+     * @param article
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping(path = "/add",method = RequestMethod.POST)
     public void addArticle(HttpSession httpSession, Article article, HttpServletResponse response) throws IOException {
             User user= (User) httpSession.getAttribute("user");
@@ -35,6 +43,10 @@ public class articleController {
             response.sendRedirect("/articles.html");
     }
 
+    /**
+     * 查询公共博客文章
+     * @return
+     */
     @RequestMapping(path = "/common",method = RequestMethod.POST)
     @ResponseBody
     public List<ArticleCommon> articleCommon(){
@@ -42,6 +54,11 @@ public class articleController {
         return  a;
     }
 
+    /**
+     * 查看个人博客
+     * @param httpSession   传入Session用来判断用户
+     * @return  当前用户的博客
+     */
     @RequestMapping(path = "/user",method =RequestMethod.POST)
     @ResponseBody
     public  List<Article> articled(HttpSession httpSession){

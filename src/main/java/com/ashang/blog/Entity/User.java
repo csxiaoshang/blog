@@ -6,6 +6,9 @@ import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
+/**
+ * 用户实体表
+ */
 @Data
 @Entity
 public class User {
