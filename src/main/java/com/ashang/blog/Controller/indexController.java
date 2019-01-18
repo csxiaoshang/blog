@@ -44,12 +44,12 @@ public class indexController {
      * @return
      */
     @GetMapping(path = "/register/user")
-    public String register(User user){
+    public Resp register(User user){
         if(user.getUsername()==null||user.getPassword()==null){
-            return "用户名或者密码不能为空";
+            return RespUtil.errorResp(Status.Api.ERROR.getCode(),"用户名或密码不能为空！");
         }
         userService.register(user);
-        return "success";
+        return RespUtil.successResp();
     }
 
     /**
@@ -60,7 +60,7 @@ public class indexController {
      */
     @GetMapping(path = "/login")
     public Resp login(User user , HttpServletRequest request){
-        if(userService.login(user).getError_code()==2000){
+        if(userService.login(user).getCode()==2000){
             HttpSession httpSession=request.getSession(true);
             httpSession.setAttribute("user",user);
             return RespUtil.successResp();

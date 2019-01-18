@@ -11,8 +11,8 @@ import com.ashang.blog.Entity.Response.Resp;
 public class RespUtil {
     public static <T> Resp<T> successResp(T data){
         Resp<T> resp=new Resp<>();
-        resp.setError_code(Status.Api.SUCCESS.getCode());
-        resp.setError_message(Status.Api.SUCCESS.getMsg());
+        resp.setCode(Status.Api.SUCCESS.getCode());
+        resp.setMessage(Status.Api.SUCCESS.getMsg());
         resp.setData(data);
         return resp;
     }
@@ -23,8 +23,8 @@ public class RespUtil {
 
     public static  Resp errorResp(Integer errorCode,String errorMsg){
         Resp resp=new Resp();
-        resp.setError_code(errorCode);
-        resp.setError_message(errorMsg);
+        resp.setCode(errorCode);
+        resp.setMessage(errorMsg);
         resp.setData(null);
         return resp;
     }

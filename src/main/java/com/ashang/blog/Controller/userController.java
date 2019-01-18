@@ -71,7 +71,7 @@ public class userController{
             if(session==null)
                 return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
             ;
-                if (userManagerService.isAdmin(session).getError_code()==2000){
+                if (userManagerService.isAdmin(session).getCode()==2000){
                     System.out.println("证实是root用户！");
                     String str= (String) session.getAttribute("admin");
                     if (str==null)

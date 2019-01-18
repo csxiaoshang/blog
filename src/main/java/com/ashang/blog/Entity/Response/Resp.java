@@ -16,7 +16,7 @@ public class Resp<T> {
      * error_message: 错误信息
      * data:{}
      */
-    private Integer error_code;
-    private String  error_message;
+    private Integer code;
+    private String  message;
     private T data;
 }
