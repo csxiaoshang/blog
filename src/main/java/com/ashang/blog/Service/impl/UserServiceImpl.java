@@ -1,10 +1,12 @@
 package com.ashang.blog.Service.impl;
 
 import com.ashang.blog.Dao.*;
+import com.ashang.blog.Entity.Constant.Status;
+import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.Role;
 import com.ashang.blog.Entity.User;
 import com.ashang.blog.Entity.UserD;
-import com.ashang.blog.Entity.UserRole;
+import com.ashang.blog.Entity.Utils.RespUtil;
 import com.ashang.blog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,19 +40,19 @@ public class UserServiceImpl implements UserService {
      * @return 布尔型参数 用来判断用户是否登录成功
      */
     @Override
-    public boolean login(User user) {
+    public Resp login(User user) {
                Optional<User> u=userDao.findByUsername(user.getUsername());
 //               u.ifPresent(user1-> user.setId(user1.getId()));
        if(u.isPresent()){
           if(user.getPassword().equals(u.get().getPassword())){
               user.setId(u.get().getId());
-              return true;
+              return RespUtil.successResp();
           }
           else
-              return false;
+              return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
        }
        else
-           return false;
+           return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
     }
 
     /**

@@ -2,7 +2,9 @@ package com.ashang.blog.Service.impl;
 
 import com.ashang.blog.Dao.ArticleDao;
 import com.ashang.blog.Entity.Article;
+import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Entity.Utils.RespUtil;
 import com.ashang.blog.Service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return 是否添加个人文章成功标志
      */
     @Override
-    public String addArticle(Article article, User user){
+    public Resp addArticle(Article article, User user){
         Article a=new Article();
         a.setArticleContent(article.getArticleContent());
         a.setArticleDescription(article.getArticleDescription());
@@ -34,6 +36,6 @@ public class ArticleServiceImpl implements ArticleService {
         a.setArticleTitle(article.getArticleTitle());
         a.setUserId(user.getId());
         articleDao.save(a);
-        return "Success";
+        return RespUtil.successResp();
     }
 }

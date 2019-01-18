@@ -1,7 +1,10 @@
 package com.ashang.blog.Controller;
 
+import com.ashang.blog.Entity.Constant.Status;
+import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
 import com.ashang.blog.Entity.UserD;
+import com.ashang.blog.Entity.Utils.RespUtil;
 import com.ashang.blog.Service.impl.UserManagerServiceImpl;
 import com.ashang.blog.Service.impl.UserServiceImpl;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -47,14 +50,14 @@ public class userController{
      * @return
      */
         @GetMapping(path = "/logout")
-        public String logout(HttpServletRequest request, HttpServletResponse response){
+        public Resp logout(HttpServletRequest request, HttpServletResponse response){
 
         HttpSession session=request.getSession(false);
         if(session==null){
-            return "false";
+            return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
         }
         session.removeAttribute("user");
-        return "success";
+        return RespUtil.successResp();
         }
 
     /**
@@ -63,23 +66,23 @@ public class userController{
      * @return
      */
         @GetMapping(path = "/manager")
-        public  String unarguable(HttpServletRequest request){
+        public  Resp unarguable(HttpServletRequest request){
             HttpSession session=request.getSession(false);
             if(session==null)
-                return "false";
-            String string=userManagerService.isAdmin(session);
-                if (string.equals("true")){
+                return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
+            ;
+                if (userManagerService.isAdmin(session).getError_code()==2000){
                     System.out.println("证实是root用户！");
                     String str= (String) session.getAttribute("admin");
                     if (str==null)
-                        return "false";
+                        return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
                     if (str.equals("true")){
-                        return "success";
+                        return RespUtil.successResp();
                 }else {
-                    return "false";
+                    return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
                 }
             }
-            return "false";
+            return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
         }
 
     /**

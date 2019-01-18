@@ -1,6 +1,8 @@
 package com.ashang.blog.Service;
 
 
+import com.ashang.blog.Entity.Response.Resp;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -11,5 +13,5 @@ import javax.servlet.http.HttpSession;
  */
 public interface UserManagerSerivce {
 
-    String isAdmin(HttpSession session);
+    Resp isAdmin(HttpSession session);
 }

@@ -1,7 +1,10 @@
 package com.ashang.blog.Controller;
 
 import com.ashang.blog.Dao.UserDao;
+import com.ashang.blog.Entity.Constant.Status;
+import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Entity.Utils.RespUtil;
 import com.ashang.blog.Service.impl.UserServiceImpl;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,15 +59,13 @@ public class indexController {
      * @return
      */
     @GetMapping(path = "/login")
-    public String login(User user , HttpServletRequest request){
-        if(userService.login(user)){
+    public Resp login(User user , HttpServletRequest request){
+        if(userService.login(user).getError_code()==2000){
             HttpSession httpSession=request.getSession(true);
             httpSession.setAttribute("user",user);
-            String str="success";
-            return str;
+            return RespUtil.successResp();
         }
-        final String s = "false";
-        return s;
+        return RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
     }
 
 

@@ -1,5 +1,6 @@
 package com.ashang.blog.Service;
 
+import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
 import com.ashang.blog.Entity.UserD;
 
@@ -14,7 +15,7 @@ public interface UserService {
      * 登录函数
      * @param user
      */
-    boolean login(User user);
+    Resp login(User user);
 
     /**
      * 注册函数

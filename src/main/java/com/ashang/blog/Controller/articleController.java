@@ -4,6 +4,7 @@ import com.ashang.blog.Dao.ArticleCommonDao;
 import com.ashang.blog.Dao.ArticleDao;
 import com.ashang.blog.Entity.Article;
 import com.ashang.blog.Entity.ArticleCommon;
+import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
 import com.ashang.blog.Service.impl.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,9 @@ public class articleController {
      * @throws IOException
      */
     @RequestMapping(path = "/add",method = RequestMethod.POST)
-    public String addArticle(HttpSession httpSession, Article article, HttpServletResponse response) throws IOException {
+    public Resp addArticle(HttpSession httpSession, Article article, HttpServletResponse response) throws IOException {
             User user= (User) httpSession.getAttribute("user");
-            articleService.addArticle(article,user);
-            return "success";
+            return articleService.addArticle(article,user);
     }
 
     /**

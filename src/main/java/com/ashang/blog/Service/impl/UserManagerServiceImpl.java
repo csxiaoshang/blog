@@ -4,13 +4,15 @@ import com.ashang.blog.Dao.PermissionDao;
 import com.ashang.blog.Dao.RolePermissionDao;
 import com.ashang.blog.Dao.UserDao;
 import com.ashang.blog.Dao.UserRoleDao;
+import com.ashang.blog.Entity.Constant.Status;
+import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Entity.Utils.RespUtil;
 import com.ashang.blog.Service.UserManagerSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 
 /**
@@ -37,12 +39,12 @@ public class UserManagerServiceImpl implements UserManagerSerivce {
      * @return 权限标志
      */
     @Override
-    public  String isAdmin(HttpSession session){
+    public Resp isAdmin(HttpSession session){
        User user= (User) session.getAttribute("user");
        Long roleid=userRoleDao.findByUserId(user.getId()).getRoleId();
        Long permissionid=rolePermissionDao.findByRoleId(roleid).getPermissionId();
        String  str=permissionDao.findById(permissionid).get().getHigh();
-       return str;
+       return str.equals("true")? RespUtil.successResp():RespUtil.errorResp(Status.Api.ERROR.getCode(),Status.Api.ERROR.getMsg());
     }
 
 }
