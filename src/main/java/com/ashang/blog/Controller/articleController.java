@@ -6,6 +6,7 @@ import com.ashang.blog.Entity.Article;
 import com.ashang.blog.Entity.ArticleCommon;
 import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Service.CommentService;
 import com.ashang.blog.Service.impl.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class articleController {
     ArticleServiceImpl articleService;
     @Autowired
     ArticleDao articleDao;
+
+    @Autowired
+    CommentService commentService;
 
     /**
      *填写发表个人博客
@@ -67,4 +71,21 @@ public class articleController {
         return a;
     }
 
+    /**
+     * 发表评论
+     * @param session
+     * @param content
+     * @param articleId
+     * @return
+     */
+    @RequestMapping(path = "/addcomment",method = RequestMethod.POST)
+    public Resp addComment(HttpSession session,@RequestParam("content") String content,
+                           @RequestParam("articleId") Long articleId){
+        return commentService.addComment(session,content,articleId);
+    }
+
+    @RequestMapping(path = "displaycomment",method = RequestMethod.POST)
+    public  Resp displayComment(@RequestParam("articleId") Long articleId){
+        return commentService.displayComment(articleId);
+    }
 }
