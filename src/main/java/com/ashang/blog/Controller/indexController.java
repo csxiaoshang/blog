@@ -6,6 +6,8 @@ import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
 import com.ashang.blog.Entity.Utils.RespUtil;
 import com.ashang.blog.Service.impl.UserServiceImpl;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +45,8 @@ public class indexController {
      * @param user
      * @return
      */
+    @ApiOperation(value = "注册用户",notes = "")
+    @ApiImplicitParam(name = "user",value = "包含用户名和密码的user类")
     @GetMapping(path = "/register/user")
     public Resp register(User user){
         if(user.getUsername()==null||user.getPassword()==null){
@@ -58,6 +62,8 @@ public class indexController {
      * @param request  第一次登录传入Session用于后续使用
      * @return
      */
+    @ApiOperation(value = "用户登录")
+    @ApiImplicitParam(name ="user", value = "user类")
     @GetMapping(path = "/login")
     public Resp login(User user , HttpServletRequest request){
         if(userService.login(user).getCode()==2000){
