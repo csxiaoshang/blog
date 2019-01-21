@@ -6,8 +6,10 @@ import com.ashang.blog.Entity.Article;
 import com.ashang.blog.Entity.ArticleCommon;
 import com.ashang.blog.Entity.Response.Resp;
 import com.ashang.blog.Entity.User;
+import com.ashang.blog.Service.ArticleService;
 import com.ashang.blog.Service.CommentService;
 import com.ashang.blog.Service.impl.ArticleServiceImpl;
+import com.ashang.blog.Service.impl.CommentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,7 @@ public class articleController {
     ArticleCommonDao articleCommonDao;
 
     @Autowired
-    ArticleServiceImpl articleService;
+    ArticleService articleService;
     @Autowired
     ArticleDao articleDao;
 
@@ -78,13 +80,13 @@ public class articleController {
      * @param articleId
      * @return
      */
-    @RequestMapping(path = "/addcomment",method = RequestMethod.POST)
+    @RequestMapping(path = "/abdomen",method = RequestMethod.POST)
     public Resp addComment(HttpSession session,@RequestParam("content") String content,
                            @RequestParam("articleId") Long articleId){
         return commentService.addComment(session,content,articleId);
     }
 
-    @RequestMapping(path = "displaycomment",method = RequestMethod.POST)
+    @RequestMapping(path = "displacement",method = RequestMethod.POST)
     public  Resp displayComment(@RequestParam("articleId") Long articleId){
         return commentService.displayComment(articleId);
     }

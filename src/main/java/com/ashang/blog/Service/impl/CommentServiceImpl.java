@@ -7,6 +7,7 @@ import com.ashang.blog.Entity.User;
 import com.ashang.blog.Entity.Utils.RespUtil;
 import com.ashang.blog.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @Date 19-1-21 下午4:50
  * @Description TODO
  **/
+@Service
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
