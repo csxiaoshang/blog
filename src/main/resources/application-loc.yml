@@ -6,3 +6,8 @@ spring:
     url: jdbc:mysql://localhost:3306/spring_blog
     username: springuser
     password: ashang
+
+
+  output:
+    ansi:
+      enabled: detect
